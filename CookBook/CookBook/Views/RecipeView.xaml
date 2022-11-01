@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:help="clr-namespace:CookBook.Helpers"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="CookBook.Views.RecipeView">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!--1st Row-->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Clicked="ImageButton_Clicked" Grid.Column="0" Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.ArrowLeft},Color=Black,Size=30}" BackgroundColor="Transparent" HorizontalOptions="Start" Margin="10,0,20,0"/>
+                    <Label  VerticalOptions="Center" Grid.Column="1" Text="{Binding SelectedRecipe.RecipeName}" FontSize="Title" FontFamily="Lobster" TextColor="Black"/>
+                </Grid>
+                
+                <!--2nd row-->
+                <Image Source="{Binding SelectedRecipe.ImageUrl}" Grid.Row="1" />
+                
+                <!--3rd row-->
+                <Grid Grid.Row="2" HeightRequest="50" Padding="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" FontAttributes="Bold" Text="{Binding SelectedRecipe.RecipeName}" FontSize="Title" TextColor="Black"/>
+                    <ImageButton Grid.Column="1" Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.HeartOutline},Color=Black,Size=30}" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Start" />
+                </Grid>
+                
+                <!--4th row-->
+                <Grid Grid.Row="3" Padding="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <ImageButton Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.Fire},Color=Black,Size=30}" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="0"/>
+                    <Label Text="{Binding SelectedRecipe.Calories}" Grid.Row="1" Grid.Column="0" TextColor="Black" HorizontalTextAlignment="Center"/>
+                    <Label Text="Calories"  Grid.Row="2" Grid.Column="0" TextColor="Black" HorizontalTextAlignment="Center"/>
+                    
+                    <ImageButton Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.RoomServiceOutline},Color=Black,Size=30}" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="1"/>
+                    <Label Text="{Binding SelectedRecipe.NumberOfServing}" Grid.Row="1" Grid.Column="1" TextColor="Black" HorizontalTextAlignment="Center"/>
+                    <Label Text="servings"  Grid.Row="2" Grid.Column="1" TextColor="Black" HorizontalTextAlignment="Center"/>
+
+                    <ImageButton Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.ClockTimeTwoOutline},Color=Black,Size=30}" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="2"/>
+                    <Label Text="{Binding SelectedRecipe.CookTime}" Grid.Row="1" Grid.Column="2" TextColor="Black" HorizontalTextAlignment="Center"/>
+                    <Label Text="mins"  Grid.Row="2" Grid.Column="2" TextColor="Black" HorizontalTextAlignment="Center"/>
+
+                    <ImageButton x:Name="RecipeTypeIcon" Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.CircleBox},Color=Black,Size=30}" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="3"/>
+                    <Label Text="{Binding SelectedRecipe.RecipeKind}" Grid.Row="1" Grid.Column="3" TextColor="Black" HorizontalTextAlignment="Center"/>
+                    <Label Text="Type"  Grid.Row="2" Grid.Column="3" TextColor="Black" HorizontalTextAlignment="Center"/>
+                    
+                    <ImageButton Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.Star},Color=Black,Size=30}" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="4"/>
+                    <Label Text="{Binding SelectedRecipe.Rating}" Grid.Row="1" Grid.Column="4" TextColor="Black" HorizontalTextAlignment="Center"/>
+                    <Label Text="Rating"  Grid.Row="2" Grid.Column="4" TextColor="Black" HorizontalTextAlignment="Center"/>
+
+                </Grid>
+                
+                <!--5th row-->
+                <Grid Grid.Row="4" Padding="10" BackgroundColor="#F1F1F1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Grid.Column="0" Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.ViewList},Color=Black,Size=30}" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Start"/>
+                    <Label Text="Ingredients Required" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" FontAttributes="Bold" FontSize="20" />
+                    <Label Text="{Binding CountIngredients}" TextColor="Black" Grid.Column="2" HorizontalOptions="End" FontAttributes="Bold" FontSize="14"/>
+                </Grid>
+                
+                
+                <!--6th row-->
+                <ListView  Grid.Row="5" ItemsSource="{Binding Ingredients}" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Grid Padding="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ImageButton Grid.Column="0" Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.CircleDouble},Color=Black,Size=10}" BackgroundColor="Transparent"/>
+                                        <Label Grid.Column="1" Text="{Binding .}" TextColor="Black" FontSize="16"/>
+                                    </Grid>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+                <!--7th row-->
+                <Grid Grid.Row="6" Padding="10" BackgroundColor="#F1F1F1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Grid.Column="0" Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.Directions},Color=Black,Size=30}" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Start"/>
+                    <Label Text="Directions" TextColor="Black" Grid.Column="1" HorizontalOptions="Start" FontAttributes="Bold" FontSize="20" />
+                </Grid>
+                
+                <!--8th row-->
+                <ListView  Grid.Row="7" ItemsSource="{Binding SelectedRecipe.Directions}" HasUnevenRows="True" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Grid Padding="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ImageButton Grid.Column="0" Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.CircleDouble},Color=Black,Size=10}" BackgroundColor="Transparent"/>
+                                        <Label Grid.Column="1" Text="{Binding .}" FontSize="16" TextColor="Black"/>
+                                    </Grid>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </Grid>
+        </ScrollView>
+        
+    </ContentPage.Content>
+</ContentPage>

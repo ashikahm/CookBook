@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CookBook.Views.SettingsPage"
+             xmlns:help="clr-namespace:CookBook.Helpers"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Add Categories" Clicked="Button_Clicked"/>
+            <Button Text="Add Recipe" Clicked="Button_Clicked_1"/>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <ImageButton Grid.Row="0" Source="{FontImage FontFamily=Material,Glyph={x:Static help:IconFont.HeartOutline},Color=Black,Size=30}" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Start" />
+                <StackLayout Grid.Row="1"   >
+                    <lottie:AnimationView 
+                x:Name="AnimationView" 
+                Animation="HeartTab.json" 
+                AutoPlay="True"
+                MaxFrame="50"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                <StackLayout Grid.Row="2"   >
+                    <lottie:AnimationView 
+                x:Name="Anie" 
+                Animation="fly.json" 
+                AutoPlay="True"
+                MaxFrame="50"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

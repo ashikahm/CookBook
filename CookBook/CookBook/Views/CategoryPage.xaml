@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CookBook.ViewModels"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:helpers="clr-namespace:CookBook.Helpers"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="CookBook.Views.CategoryPage">
+    <ContentPage.BindingContext>
+        <local:CategoryViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal" Grid.Row="0">
+                <SearchBar Placeholder="Search Category" TextChanged="SearchBar_TextChanged"/>
+            </StackLayout>
+            <CollectionView ItemsSource="{Binding categoriesList}" Grid.Row="1" SelectionChanged="CollectionView_SelectionChanged" SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout VerticalItemSpacing="1" Span="2" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="180"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <pancake:PancakeView  CornerRadius="10" Margin="10,10,5,0">
+                                    <StackLayout>
+                                        <ImageButton Source="{Binding CategoryPoster}" />
+                                        <StackLayout Margin="20,-50,10,0">
+                                            <Label Text="{Binding CategoryName}" TextColor="White" FontSize="20" FontAttributes='Bold'/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </pancake:PancakeView>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
